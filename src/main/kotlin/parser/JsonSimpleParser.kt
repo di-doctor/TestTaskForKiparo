@@ -1,27 +1,12 @@
+package parser
+
 import model.News
 import model.Root
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
-
-/*val id: Int,
-val title: String,
-val description: String,
-val date: String,
-val visible: Boolean,
-val keywords: List<String>,*/
-
-private const val NAME = "name"
-private const val LOCATION = "location"
-private const val NEWS_LIST = "news"
-
-private const val ID = "id"
-private const val TITLE = "title"
-private const val DESCRIPTION = "description"
-private const val DATE = "date"
-private const val VISIBLE = "visible"
-private const val KEYWORDS = "keywords"
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 class JsonSimpleParser {
     fun parse(str: String): Root {
@@ -46,12 +31,12 @@ class JsonSimpleParser {
             for (itemKeywords in keywordsJsonList) {
                 keyWordsList.add(itemKeywords as String)
             }
-
+            val formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss Z", Locale.ENGLISH);
             val news = News(
                 id = id.toInt(),
                 title = title,
                 description = description,
-                date = date,
+                date = formatter.parse(date),
                 visible = visible,
                 keywords = keyWordsList
             )
