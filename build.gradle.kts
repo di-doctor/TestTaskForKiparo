@@ -26,6 +26,11 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
 
 
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.14.2")
+
+    //jsoup
+    implementation ("org.jsoup:jsoup:1.15.3")
 
 }
 

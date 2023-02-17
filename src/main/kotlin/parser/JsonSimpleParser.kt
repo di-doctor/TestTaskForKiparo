@@ -31,7 +31,7 @@ class JsonSimpleParser {
             for (itemKeywords in keywordsJsonList) {
                 keyWordsList.add(itemKeywords as String)
             }
-            val formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss Z", Locale.ENGLISH);
+            val formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss Z", Locale.ENGLISH)
             val news = News(
                 id = id.toInt(),
                 title = title,
