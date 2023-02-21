@@ -1,4 +1,5 @@
-package InternetService
+/*
+package data.network.internetService
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -7,9 +8,9 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-private const val ENDPOINT = "https://api2.kiparo.com/"
-const val JSON_URI = "static/it_news.json"
-const val XML_URI = "static/it_news.xml"
+//const val ENDPOINT = "https://api2.kiparo.com/"
+//const val JSON_URI = "static/it_news.json"
+//const val XML_URI = "static/it_news.xml"
 
 class ApplyData() {
     var strFromKiparo: String = ""
@@ -53,4 +54,4 @@ class ApplyData() {
         }
         th.start()
     }
-}
+}*/

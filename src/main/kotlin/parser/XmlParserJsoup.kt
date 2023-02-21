@@ -1,15 +1,14 @@
 package parser
 
-import InternetService.ApplyData
-import model.News
-import model.Root
+import domain.models.News
+import domain.models.Root
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import java.text.SimpleDateFormat
 import java.util.*
 
 class XmlParserJsoup {
-    fun parse(str:String) :Root{
+    fun parse(str: String): Root {
         val doc = Jsoup.parse(str)
         val location = doc.body().getElementsByTag("location").text()
         val name = doc.body().getElementsByTag("name").text()
@@ -17,6 +16,7 @@ class XmlParserJsoup {
         val newsElement = doc.body().getElementsByTag("news")
         //val listElement = newsElement.first()?.getElementsByTag("element")
         val listElement = newsElement.first()?.select("news > element")
+
         val newsList = mutableListOf<News>()
         if (listElement != null) {
             for (element in listElement) {
@@ -32,10 +32,11 @@ class XmlParserJsoup {
 
                 val keywordsElementList = element.getElementsByTag("keywords")
                     .first()?.getElementsByTag("element") ?: emptyList<Element>()
-                val keyList = mutableListOf<String>()
-                keywordsElementList.map { it.text() }.let { keyList.addAll(it) }
 
-                News(id, title, description, date, visible, keyList).also { news: News -> newsList.add(news) }
+                val keyList = keywordsElementList
+                    .map { it.text() }
+
+                News(id, title, description, date, visible, keyList).let { news: News -> newsList.add(news) }
             }
         }
         return Root(name, location, newsList).also { println(it) }

@@ -1,7 +1,7 @@
 package parser
 
-import model.News
-import model.Root
+import domain.models.News
+import domain.models.Root
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser

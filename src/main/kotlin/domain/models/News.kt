@@ -1,4 +1,4 @@
-package model
+package domain.models
 
 import java.util.Date
 
