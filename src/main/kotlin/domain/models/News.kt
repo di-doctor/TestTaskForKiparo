@@ -10,3 +10,6 @@ data class News(
     val visible: Boolean,
     val keywords: List<String>,
 )
+// моделька для парсера
+
+

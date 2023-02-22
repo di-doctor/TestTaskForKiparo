@@ -1,4 +1,4 @@
-package parser
+package domain.useCases.parsing
 
 import domain.models.News
 import domain.models.Root
@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element
 import java.text.SimpleDateFormat
 import java.util.*
 
-class XmlParserJsoup {
+class XmlParserJsoupUseCase {
     fun parse(str: String): Root {
         val doc = Jsoup.parse(str)
         val location = doc.body().getElementsByTag("location").text()
@@ -39,6 +39,6 @@ class XmlParserJsoup {
                 News(id, title, description, date, visible, keyList).let { news: News -> newsList.add(news) }
             }
         }
-        return Root(name, location, newsList).also { println(it) }
+        return Root(name, location, newsList)//.also { println(it) }
     }
 }

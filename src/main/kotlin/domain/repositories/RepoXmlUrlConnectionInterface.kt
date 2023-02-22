@@ -1,4 +1,4 @@
-package domain.repositorys
+package domain.repositories
 
 import domain.models.ModelData
 

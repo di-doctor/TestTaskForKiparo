@@ -12,9 +12,9 @@ import domain.useCases.GetJsonOkHttpUseCase
 import domain.useCases.GetJsonUrlConnectionUseCase
 import domain.useCases.GetXmlOkHttpUseCase
 import domain.useCases.GetXmlUrlConnectionUseCase
-import parser.GsonParser
-import parser.JsonSimpleParser
-import parser.XmlParserJsoup
+import domain.useCases.parsing.GsonParserUseCase
+import domain.useCases.parsing.JsonSimpleParserUseCase
+import domain.useCases.parsing.XmlParserJsoupUseCase
 
 
 fun main() {
@@ -25,34 +25,26 @@ fun main() {
                 "Нажмите 4 что -бы скачать XML используя OkHttp"
     )
     val modeChoice = (readlnOrNull() ?: "0")
-    //val service = ApplyData()
     val resultModelData = when (modeChoice) {
-        "1" -> //service.getStrFromKiparoUseUrlConnection(JSON_URI)
-            GetJsonUrlConnectionUseCase(RepoJsonUrlConnectionImp(UsesUrlConnectionImp())).execute()
+        "1" ->   GetJsonUrlConnectionUseCase(RepoJsonUrlConnectionImp(UsesUrlConnectionImp())).execute()
 
-        "2" -> //service.getStrFromKiparoUseOkHttp(JSON_URI)
-            GetJsonOkHttpUseCase(RepoJsonOkHttpImp(UsesOkhttpImp())).execute()
+        "2" ->  GetJsonOkHttpUseCase(RepoJsonOkHttpImp(UsesOkhttpImp())).execute()
 
         "3" -> GetXmlUrlConnectionUseCase(RepoXmlUrlConnectionImp(UsesUrlConnectionImp())).execute()
 
-        "4" -> //service.getStrFromKiparoUseOkHttp(XML_URI)
-            GetXmlOkHttpUseCase(RepoXmlOkHttpImp(UsesOkhttpImp())).execute()
+        "4" ->  GetXmlOkHttpUseCase(RepoXmlOkHttpImp(UsesOkhttpImp())).execute()
 
         else -> {
             ModelData("")
         }
     }
 
-    // здесь можно что-то делать пока данные скачиваются.
-
-    //service.th.join()   // ждем пока данные придут с другого потока
-
     var listNews: List<News> = emptyList()
     if (modeChoice in ("1".."2")) {
         println("Введите 1-если хотите использовать JsonSimpleParser, 2- eсли Gson")
         listNews = when ((readlnOrNull() ?: "0")) {
-            "1" -> JsonSimpleParser().parse(resultModelData.data).newsList
-            "2" -> GsonParser().parse(resultModelData.data).newsList
+            "1" -> JsonSimpleParserUseCase().parse(resultModelData.data).newsList
+            "2" -> GsonParserUseCase().parse(resultModelData.data).newsList
             else -> {
                 emptyList()
             }
@@ -60,7 +52,7 @@ fun main() {
     } else if (modeChoice in "3".."4") {
 
         try {
-            listNews = XmlParserJsoup().parse(resultModelData.data).newsList
+            listNews = XmlParserJsoupUseCase().parse(resultModelData.data).newsList
         } catch (e: Exception) {
             println("Error Xml Parsing\n${e.printStackTrace()}")
         }
@@ -94,8 +86,8 @@ fun main() {
 
             "6" -> break
         }
-        println("\nЕсли хотите продолжить нажмите любую кнопку. Если нужно выдти нажмите 5")
-        if ((readlnOrNull() ?: "0") == "5") continueQuestion = false
+        println("\nЕсли хотите продолжить нажмите любую кнопку. Если нужно выдти нажмите 6")
+        if ((readlnOrNull() ?: "0") == "6") continueQuestion = false
 
     } while (continueQuestion)
     println("The program is done")

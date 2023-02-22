@@ -1,7 +1,7 @@
-package domain.repositorys
+package domain.repositories
 
 import domain.models.ModelData
 
-interface RepoXmlOkHttpInterface {
+interface RepoJsonOkHttpInterface {
     fun getData() : ModelData
 }

@@ -12,4 +12,6 @@ data class Root(
     @SerializedName("news")
     val newsList: List<News> = emptyList(),
 )
+// моделька для парсера
+
 

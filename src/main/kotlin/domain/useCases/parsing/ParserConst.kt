@@ -1,4 +1,4 @@
-package parser
+package domain.useCases.parsing
 
 const val NAME = "name"
 const val LOCATION = "location"

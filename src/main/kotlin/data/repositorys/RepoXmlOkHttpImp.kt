@@ -1,15 +1,15 @@
 package data.repositorys
 
-import data.network.JSON_URI
 import data.network.RemoteDataInterface
 import data.network.XML_URI
 import domain.models.ModelData
-import domain.repositorys.RepoXmlOkHttpInterface
+import domain.repositories.RepoXmlOkHttpInterface
 
-class RepoXmlOkHttpImp(val remoteD: RemoteDataInterface):RepoXmlOkHttpInterface {
+class RepoXmlOkHttpImp(private val remoteD: RemoteDataInterface):RepoXmlOkHttpInterface {
     override fun getData(): ModelData {
         remoteD.getData(XML_URI)
-        remoteD.th.join()
-        return ModelData(remoteD.dataFromKiparo.data)
+        //В основном потоке можно делать  полезную работу.
+        remoteD.th.join() //Ждем пока придут данные
+        return ModelData(remoteD.dataFromKiparo.data)   // Маппинг из модельки представленной в Data слое  в модельку представленная в слое domain
     }
 }

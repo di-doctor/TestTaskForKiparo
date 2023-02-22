@@ -1,4 +1,4 @@
-package parser
+package domain.useCases.parsing
 
 import domain.models.News
 import domain.models.Root
@@ -8,7 +8,7 @@ import org.json.simple.parser.JSONParser
 import java.text.SimpleDateFormat
 import java.util.*
 
-class JsonSimpleParser {
+class JsonSimpleParserUseCase {
     fun parse(str: String): Root {
         val parser = JSONParser()
         val rootJsonObject = parser.parse(str) as JSONObject

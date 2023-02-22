@@ -1,7 +1,7 @@
 package domain.useCases
 
 import domain.models.ModelData
-import domain.repositorys.RepoJsonUrlConnectionInterface
+import domain.repositories.RepoJsonUrlConnectionInterface
 
 
 class GetJsonUrlConnectionUseCase(private val repo: RepoJsonUrlConnectionInterface) {
